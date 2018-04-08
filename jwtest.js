@@ -13,14 +13,23 @@ var demo = new Vue({
     methods: {
         toggleSquare: function(){
             this.square = !this.square;
+            this.resetPos();
         },
         toggleEnglish: function(){
             this.english = !this.english;
         },
-        kuk: function() {
-        	for(var x = 0;x<2;x++) {
-        		this.compassIndex++;
-        	}
+        incrSize: function() {
+        	this.size++;
+        	this.resetPos();
+        },
+        decrSize: function() {
+        	this.size--;
+        	this.resetPos();
+        },
+        resetPos: function() {
+        	this.y = 0;
+        	this.x = 0;
+        	this.compassIndex = 0;
         },
         processInput: function(){
         	var obj = {x: this.x, y: this.y, compassIndex: this.compassIndex};
@@ -28,50 +37,71 @@ var demo = new Vue({
 
         	for(var index=0;index<this.inputString.length;index++) {
 
-        		var letter = this.inputString[index];
-
         		if(this.english && (this.inputString[index] === 'L' || this.inputString[index] === 'R') || !this.english && (this.inputString[index] === 'V' || this.inputString[index] === 'H')) {
         			
-					obj.compassIndex = this.changeDirection(letter, obj.compassIndex);
+					obj = this.changeDirection(this.inputString[index], obj);
 
-        		}else if(this.english && this.inputString[index] === "G" || !this.english && this.inputString[index] === "F") {
+        		}else if(this.english && this.inputString[index] === "G" && this.square || !this.english && this.inputString[index] === "F" && this.square) {
         			
-        			obj = this.move(obj);
-     				console.log(obj);
+        			obj = this.moveSquare(obj);
 
+
+        		}else if(this.english && this.inputString[index] === "G" && !this.square || !this.english && this.inputString[index] === "F" && !this.square) {
+
+        			obj = this.moveCircle(obj);
         		}
         	}
+
+
         	this.x = obj.x;
         	this.y = obj.y;
         	this.compassIndex = obj.compassIndex;
-
         },
-        changeDirection: function(direction, compassIndex){
+        changeDirection: function(direction, obj){
     		switch(direction){
         		case "L":
         		case "V":
-        			compassIndex = (compassIndex === 0) ? 3 : compassIndex--;
+        			(obj.compassIndex === 0) ? obj.compassIndex = 3 : obj.compassIndex--;
         			break;
         		case "R":
         		case "H":
-        			compassIndex = (compassIndex === 3) ? 0 : compassIndex++;
+        			(obj.compassIndex === 3) ? obj.compassIndex = 0 : obj.compassIndex++;
         			break;	
     		}
-    		return compassIndex;
+    		return obj;
         },
-        move: function(obj){
+        moveSquare: function(obj){
     		switch(obj.compassIndex){
         		case 0:
-        			(obj.x === this.size) ? obj.x : obj.x++;
-        			break;
-        		case 1:
         			(obj.y === this.size) ? obj.y : obj.y++;
         			break;
+        		case 1:
+        			(obj.x === this.size) ? obj.x : obj.x++;
+        			break;
         		case 2: 
-        			(obj.x === 0) ? 0 : obj.x--;
+        			(obj.y === 0) ? 0 : obj.y--;
         			break;
         		case 3:
-        		 	(obj.y === 0) ? 0 : obj.y--;
+        		 	(obj.x === 0) ? 0 : obj.x--;
+        		 	break;
+    		}
+    		return obj;
+        },
+        moveCircle: function(obj){
+        	var minSize = (this.size - (this.size * 2));
+
+    		switch(obj.compassIndex){
+        		case 0:
+        			(obj.y === this.size) ? obj.y : obj.y++;
+        			break;
+        		case 1:
+        			(obj.x === this.size) ? obj.x : obj.x++;
+        			break;
+        		case 2: 
+        			(obj.y === minSize) ? obj.y : obj.y--;
+        			break;
+        		case 3:
+        		 	(obj.x === minSize) ? obj.x : obj.x--;
         		 	break;
     		}
     		return obj;

@@ -1,11 +1,20 @@
 <div id="main">
-<button v-on:click="toggleEnglish">toggle english</button>
-<button v-on:click="toggleSquare">toggle square</button>
+<button v-on:click="toggleEnglish">{{ english ? "ENGLISH" : "SVENSKA" }}</button>
+<button v-on:click="toggleSquare">{{square ? "SQUARE" : "CIRCLE"}}</button>
 <button v-on:click="processInput">processinput</button>
-<button v-on:click="kuk">kuk</button>
-<p>{{ y }}</p>
-<p>{{ x }}</p>
-<p>{{ compassIndex }}</p>
+
+<button v-on:click="incrSize">+</button>
+<button v-on:click="decrSize">-</button>
+
+<p>{{ square ? "Size: " + size + "x"+size : "Size: a radius of" +size}} </p>
+
+ <p> y: {{ y }}</p>
+ <p> x:{{ x }}</p>
+
+
+<p>{{ compass[compassIndex] }}</p>
+
+
 <p>{{ english }}</p>
 <p>{{ square }}</p>
 
