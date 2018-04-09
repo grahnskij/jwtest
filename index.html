@@ -1,24 +1,39 @@
-<div id="main">
-<button v-on:click="toggleEnglish">{{ english ? "ENGLISH" : "SVENSKA" }}</button>
-<button v-on:click="toggleSquare">{{square ? "SQUARE" : "CIRCLE"}}</button>
-<button v-on:click="processInput">processinput</button>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jwtest</title>
+  <link rel="stylesheet" href="normalize.css">
+  <link rel="stylesheet" href="style.css">
+</head>
 
-<button v-on:click="incrSize">+</button>
-<button v-on:click="decrSize">-</button>
+<div class="horizContainer">
+  <div class="side"></div>
+  <div class="main border" id="main">
+    <div class="horizContainer">
+      <div class="vertContainer">
+        <button class="btn border txt" v-on:click="toggleEnglish">{{ english ? "ENGLISH" : "SVENSKA" }}</button>
+        <button class="btn border txt" v-on:click="toggleSquare">{{square ? "SQUARE" : "CIRCLE"}}</button>
+        <button class="btn border txt" v-on:click="processInput">GO!</button>
+      <div class="horizContainer sizeCtrl">
+        <button class="sml border txt" v-on:click="incrSize">+</button>
+        <input class="sizeInput border txt" disabled v-model="size">
+        <button class="sml border txt" v-on:click="decrSize">-</button>
+      </div>
+    </div>
 
-<p>{{ square ? "Size: " + size + "x"+size : "Size: a radius of" +size}} </p>
 
- <p> y: {{ y }}</p>
- <p> x:{{ x }}</p>
+  <div class="vertContainer">
+    <p class="txt">{{square ? "The robot is currently in a square room measuring " + size +" by "+size +"." : "The robot is currently in a circular room with a radius of "+size+ "." }}</p>
+
+    <p class="txt">Its location is {{x}} along the x axis and {{y}} on the y axis. It is facing {{compass[compassIndex]}}.</p>
+</div>
+  </div>
 
 
-<p>{{ compass[compassIndex] }}</p>
 
-
-<p>{{ english }}</p>
-<p>{{ square }}</p>
-
-<input v-model="inputString" placeholder="edit me">
+    <input class="instructionInput border txt" v-model="inputString" placeholder="hej">
+  </div>
+  <div class="side"></div>
 </div>
 
 <script src="vue.js"></script>

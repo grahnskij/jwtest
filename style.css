@@ -1,0 +1,55 @@
+.btn {
+  cursor: pointer;
+  padding: 10px 20px;
+  margin: 0px 10px 10px 0px;
+  width: 120px;
+}
+
+.border {
+  border: 2px solid #0e83cd;
+}
+
+.sml {
+  width: 30px;
+  height: 30px;
+}
+
+.txt {
+  color: #0e83cd;
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-family: sans-serif;
+}
+
+.sizeInput {
+  text-align: center;
+  height: 30px;
+  width: 50px;
+  margin: 0px 5px 10px 5px;
+}
+
+.instructionInput {
+  padding: 10px 5px;
+  font-size: 14px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    flex: 1 0 50%;
+    min-width: 400px;
+}
+
+.side {
+  flex: 1 0 25%;
+}
+
+.vertContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.horizContainer {
+  display: flex;
+}
