@@ -6,31 +6,41 @@
 }
 
 .border {
-  border: 2px solid #0e83cd;
+  border: 2px solid #6587bf;
 }
 
 .sml {
   width: 30px;
   height: 30px;
+  cursor: pointer;
 }
 
 .txt {
-  color: #0e83cd;
+  color: #6587bf;
   font-weight: 700;
   letter-spacing: 1px;
   font-family: sans-serif;
+  margin-bottom: 10px;
+}
+
+.importantTxt {
+  color: #0e83cd;
+  font-weight: 700;
+  font-size: 24px;
 }
 
 .sizeInput {
   text-align: center;
   height: 30px;
   width: 50px;
-  margin: 0px 5px 10px 5px;
+  margin: 0px 5px 0px 5px;
 }
 
 .instructionInput {
   padding: 10px 5px;
   font-size: 14px;
+  flex: 1 0 70%;
+  margin-right: 10px;
 }
 
 .main {

@@ -1,4 +1,4 @@
-var demo = new Vue({
+var vm = new Vue({
     el: '#main',
     data: {
     	compass: ["N", "E", "S", "W"],
@@ -7,16 +7,22 @@ var demo = new Vue({
         english: true,
         size: 10,
         compassIndex: 0,
-        y: 0,
-        x: 0
+        y: 1,
+        x: 1,
+        placeHolder: "Please input commands"
     },
     methods: {
         toggleSquare: function(){
-            this.square = !this.square;
-            this.resetPos();
+          this.square = !this.square;
+          this.resetPos();
         },
         toggleEnglish: function(){
-            this.english = !this.english;
+          this.english = !this.english;
+          if(this.english) {
+            this.placeHolder = "Please input commands";
+          }else {
+            this.placeHolder = "Skriv kommandon här"
+          }
         },
         incrSize: function() {
           if(this.size < 100) {
@@ -31,27 +37,25 @@ var demo = new Vue({
           }
         },
         resetPos: function() {
+          this.compassIndex = 0;
+          if(this.square) {
+            this.y = 1;
+          	this.x = 1;
+          }else{
           	this.y = 0;
           	this.x = 0;
-          	this.compassIndex = 0;
+          }
         },
         processInput: function(){
         	var obj = {x: this.x, y: this.y, compassIndex: this.compassIndex};
 
-
         	for(var index=0;index<this.inputString.length;index++) {
-
         		if(this.english && (this.inputString[index] === 'L' || this.inputString[index] === 'R') || !this.english && (this.inputString[index] === 'V' || this.inputString[index] === 'H')) {
-
-					obj = this.changeDirection(this.inputString[index], obj);
-
-        		}else if(this.english && this.inputString[index] === "G" || !this.english && this.inputString[index] === "F") {
-
-        			obj = this.move(obj);
-
+					        obj = this.changeDirection(this.inputString[index], obj);
+            }else if(this.english && this.inputString[index] === "F" || !this.english && this.inputString[index] === "G") {
+                  obj = this.move(obj);
         		}
         	}
-
 
         	this.x = obj.x;
         	this.y = obj.y;
@@ -74,16 +78,16 @@ var demo = new Vue({
           var minSize = (this.size - (this.size * 2));
       		switch(obj.compassIndex){
           		case 0:
-          			(obj.y === this.size) ? obj.y : obj.y++;
+          			(obj.y === this.size) ? 0 : obj.y++;
           			break;
           		case 1:
-          			(obj.x === this.size) ? obj.x : obj.x++;
+          			(obj.x === this.size) ? 0 : obj.x++;
           			break;
           		case 2:
-                (this.square) ? (obj.y === 0) ? 0 : obj.y-- : (obj.y === minSize) ? obj.y : obj.y--;
+                (this.square) ? (obj.y === 1) ? 0 : obj.y-- : (obj.y === minSize) ? 0 : obj.y--;
           			break;
           		case 3:
-                (this.square) ? (obj.x === 0) ? 0 : obj.x-- : (obj.x === minSize) ? obj.x : obj.x--;
+                (this.square) ? (obj.x === 1) ? 0 : obj.x-- : (obj.x === minSize) ? 0 : obj.x--;
           		 	break;
       		}
       		return obj;

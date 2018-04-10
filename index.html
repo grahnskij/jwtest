@@ -1,40 +1,40 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>jwtest</title>
+  <title>jwdemo</title>
   <link rel="stylesheet" href="normalize.css">
   <link rel="stylesheet" href="style.css">
 </head>
 
-<div class="horizContainer">
-  <div class="side"></div>
-  <div class="main border" id="main">
-    <div class="horizContainer">
-      <div class="vertContainer">
-        <button class="btn border txt" v-on:click="toggleEnglish">{{ english ? "ENGLISH" : "SVENSKA" }}</button>
-        <button class="btn border txt" v-on:click="toggleSquare">{{square ? "SQUARE" : "CIRCLE"}}</button>
-        <button class="btn border txt" v-on:click="processInput">GO!</button>
-      <div class="horizContainer sizeCtrl">
-        <button class="sml border txt" v-on:click="incrSize">+</button>
-        <input class="sizeInput border txt" disabled v-model="size">
-        <button class="sml border txt" v-on:click="decrSize">-</button>
+<div id="main">
+  <div class="horizContainer">
+    <div class="side"></div>
+    <div class="main border">
+      <div class="horizContainer">
+        <div class="vertContainer">
+          <button class="btn border txt" v-on:click="toggleEnglish">{{ english ? "ENGLISH" : "SVENSKA" }}</button>
+          <button class="btn border txt" v-on:click="toggleSquare">{{square ? "SQUARE" : "CIRCLE"}}</button>
+          <span class="txt">Size:</span>
+          <div class="horizContainer sizeCtrl">
+            <button class="sml border txt" v-on:click="decrSize">-</button>
+            <input class="sizeInput border txt" disabled v-model="size">
+            <button class="sml border txt" v-on:click="incrSize">+</button>
+          </div>
+
+        </div>
+        <div class="vertContainer">
+          <div class="txt">{{square ? "The robot is currently in a square room measuring " + size +" by "+size +"." : "The robot is currently in a circular room with a radius of "+size+ "." }}</div>
+          <div class="txt">Its location is <span class="importantTxt">{{x}}</span> along the x axis and <span class="importantTxt">{{y}}</span> on the y axis. It is facing <span class="importantTxt">{{compass[compassIndex]}}</span>.</div>
+        </div>
+      </div>
+      <div class="horizContainer">
+        <input class="instructionInput border txt" v-model="inputString" :placeholder="placeHolder">
+        <button class="btn border txt" v-on:click="processInput">{{english ? "GO!" : "KÖR!"}}</button>
       </div>
     </div>
-
-
-  <div class="vertContainer">
-    <p class="txt">{{square ? "The robot is currently in a square room measuring " + size +" by "+size +"." : "The robot is currently in a circular room with a radius of "+size+ "." }}</p>
-
-    <p class="txt">Its location is {{x}} along the x axis and {{y}} on the y axis. It is facing {{compass[compassIndex]}}.</p>
-</div>
+    <div class="side"></div>
   </div>
-
-
-
-    <input class="instructionInput border txt" v-model="inputString" placeholder="hej">
-  </div>
-  <div class="side"></div>
 </div>
 
 <script src="vue.js"></script>
-<script src="jwtest.js"></script>
+<script src="hejdo.js"></script>
