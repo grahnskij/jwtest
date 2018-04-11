@@ -1,7 +1,7 @@
 var vm = new Vue({
     el: '#main',
     data: {
-    	compass: ["N", "E", "S", "W"],
+      	compass: ["N", "E", "S", "W"],
         inputString: "",
         square: true,
         english: true,
@@ -9,7 +9,7 @@ var vm = new Vue({
         compassIndex: 0,
         y: 1,
         x: 1,
-        placeHolder: "Please input commands"
+        placeholder: "Please input commands"
     },
     methods: {
         toggleSquare: function(){
@@ -19,9 +19,9 @@ var vm = new Vue({
         toggleEnglish: function(){
           this.english = !this.english;
           if(this.english) {
-            this.placeHolder = "Please input commands";
+            this.placeholder = "Please input commands";
           }else {
-            this.placeHolder = "Skriv kommandon här"
+            this.placeholder = "Skriv kommandon här"
           }
         },
         incrSize: function() {
@@ -31,7 +31,7 @@ var vm = new Vue({
           }
         },
         decrSize: function() {
-          if(this.size > 0) {
+          if(this.size > 1) {
             this.size--;
           	this.resetPos();
           }
